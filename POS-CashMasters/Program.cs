@@ -35,10 +35,10 @@ namespace POS_CashMasters
 
                     decimal dPrice;
                     Entries oEnt = new Entries();
-                    dPrice = oValid.ValidateInput();
+                    dPrice = oValid.ValidateInput(); // validating only numeric values when typing
                     oEnt.dPrice = dPrice;
                     string sSymbol = NumberFormatInfo.CurrentInfo.CurrencySymbol.ToString();
-                    Console.Write("\r" + sSymbol + " " + string.Format("{0:0,0.00}", dPrice));
+                    Console.Write("\r" + sSymbol + " " + string.Format("{0:0,0.00}", dPrice)); // displaying the entry on correct format
 
 
                     Console.WriteLine("\nCash In: ");
@@ -47,20 +47,20 @@ namespace POS_CashMasters
                     Console.Write("\r" + sSymbol + " " + string.Format("{0:0,0.00}", dCash));
 
                     
-                    results = oC.Validate(oEnt);
+                    results = oC.Validate(oEnt); // applying validations of Qtys for the entries
 
                     if (!results.IsValid)
                         foreach (var failure in results.Errors)
                         {
-                            Console.WriteLine("Failed validation. Error was: " + failure.ErrorMessage);
+                            Console.WriteLine("\nError: " + failure.ErrorMessage);
                         }
                     else
                     {
-                        //Console.WriteLine("\n{0}  {1}", dPrice, dCash);
+                        //id entires are valid calculate the change and minimum denominations
 
                         decimal dChange = dCash - dPrice;
 
-                        CalculateChange(dChange,sSymbol);
+                        oUtil.CalculateChange(dChange,sSymbol);
 
                     }
                 } while (!results.IsValid);
@@ -92,53 +92,6 @@ namespace POS_CashMasters
                 Console.Write("Error occurred! Please try again." + ex.Message);
             }
            
-        }
-
-        
-
-        static void CalculateChange(decimal dChange, string sCurrencySymbol)
-        {
-
-
-            TypesOfCurrencies obj = new TypesOfCurrencies();
-            var bills = obj.CurrValues1.FirstOrDefault(x => x.Key == Thread.CurrentThread.CurrentCulture.Name).Value; 
-            var breakdown =
-                bills
-                    .OrderByDescending(x => x)
-                    .Aggregate(new { dChange, bills = new List<decimal>() },
-                        (a, b) =>
-                        {
-                            var v = a.dChange;
-                            while (v >= b)
-                            {
-                                a.bills.Add(b);
-                                v -= b;
-                            }
-                            return new { dChange = v, a.bills };
-                        })
-                    .bills
-                    .GroupBy(x => x)
-                    .Select(x => new { Bill = x.Key, Count = x.Count() });
-
-            
-
-            if(breakdown.ToArray().Length == 0)
-                Console.WriteLine("\nChange $0.0 \n Thanks for your purchase!");
-            else
-            {
-                Console.WriteLine("\nPlease return as change " + sCurrencySymbol + " " + string.Format("{0:0,0.00}", dChange)
-                + " in the following denomination");
-                foreach (var i in breakdown)
-                {
-                    Console.WriteLine(i.Count + " Bill of " +sCurrencySymbol + i.Bill + "  ");
-                }
-                Console.WriteLine("\nThanks for your purchase!");
-
-            }
-
-           
-      
-
         }
     }
 }
