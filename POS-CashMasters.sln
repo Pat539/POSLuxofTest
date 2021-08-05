@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.810.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POS-CashMasters", "POS-CashMasters\POS-CashMasters.csproj", "{0074EC66-A45A-4B66-B746-31AB7D4F3AAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPOS", "TestPOS\TestPOS.csproj", "{FC0AC8B3-A6E3-4E83-BA4E-053E9CFD798D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0074EC66-A45A-4B66-B746-31AB7D4F3AAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0074EC66-A45A-4B66-B746-31AB7D4F3AAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0074EC66-A45A-4B66-B746-31AB7D4F3AAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0074EC66-A45A-4B66-B746-31AB7D4F3AAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC0AC8B3-A6E3-4E83-BA4E-053E9CFD798D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC0AC8B3-A6E3-4E83-BA4E-053E9CFD798D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC0AC8B3-A6E3-4E83-BA4E-053E9CFD798D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC0AC8B3-A6E3-4E83-BA4E-053E9CFD798D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {80D757FB-FB42-460F-AC7E-CEE7E4CB2E53}
+	EndGlobalSection
+EndGlobal
