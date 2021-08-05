@@ -56,11 +56,11 @@ namespace POS_CashMasters
                         }
                     else
                     {
-                        Console.WriteLine("\n{0}  {1}", dPrice, dCash);
+                        //Console.WriteLine("\n{0}  {1}", dPrice, dCash);
 
                         decimal dChange = dCash - dPrice;
 
-                        CalculateChange(dChange);
+                        CalculateChange(dChange,sSymbol);
 
                     }
                 } while (!results.IsValid);
@@ -96,7 +96,7 @@ namespace POS_CashMasters
 
         
 
-        static void CalculateChange(decimal dChange)
+        static void CalculateChange(decimal dChange, string sCurrencySymbol)
         {
 
 
@@ -120,10 +120,23 @@ namespace POS_CashMasters
                     .GroupBy(x => x)
                     .Select(x => new { Bill = x.Key, Count = x.Count() });
 
-            foreach(var  i in breakdown)
+            
+
+            if(breakdown.ToArray().Length == 0)
+                Console.WriteLine("\nChange $0.0 \n Thanks for your purchase!");
+            else
             {
-                Console.WriteLine(i.Count + " Bill of " + i.Bill + "  ");
+                Console.WriteLine("\nPlease return as change " + sCurrencySymbol + " " + string.Format("{0:0,0.00}", dChange)
+                + " in the following denomination");
+                foreach (var i in breakdown)
+                {
+                    Console.WriteLine(i.Count + " Bill of " +sCurrencySymbol + i.Bill + "  ");
+                }
+                Console.WriteLine("\nThanks for your purchase!");
+
             }
+
+           
       
 
         }
